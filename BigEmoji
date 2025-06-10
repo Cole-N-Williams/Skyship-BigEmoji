@@ -79,24 +79,24 @@
 	
 	{{if $emoji}}
 	{{if eq (add (len $emoji) (len $defEmoji)) 1}}
-		{{with $emoji}}
-			{{$animated := index . 0 1}}
-			{{$id := str (index . 0 2)}}
-			{{$ext := ".png"}}{{$typeExt := "Image"}}
-			{{if $animated}}{{$ext = ".gif"}} {{$typeExt = "Gif"}}{{end}}
-			{{$embed.Set "image" (sdict "url" (printf "https://cdn.discordapp.com/emojis/%s%s" $id $ext))}}
-			{{- $embed.Set "description" (print "`" (index (split (index $emoji 0 0) ":") 1) "`\n[" $typeExt " Link](https://cdn.discordapp.com/emojis/" $id $ext ")") -}}
-		{{end}}
+		// {{with $emoji}}
+		// 	{{$animated := index . 0 1}}
+		// 	{{$id := str (index . 0 2)}}
+		// 	{{$ext := ".png"}}{{$typeExt := "Image"}}
+		// 	{{if $animated}}{{$ext = ".gif"}} {{$typeExt = "Gif"}}{{end}}
+		// 	{{$embed.Set "image" (sdict "url" (printf "https://cdn.discordapp.com/emojis/%s%s" $id $ext))}}
+		// 	{{- $embed.Set "description" (print "`" (index (split (index $emoji 0 0) ":") 1) "`\n[" $typeExt " Link](https://cdn.discordapp.com/emojis/" $id $ext ")") -}}
+		// {{end}}
 	{{else}}
-		{{range $emoji}}
-			{{$animated := index . 1}}
-			{{$id := index . 2}}
-			{{$ext := ".png"}}{{$typeExt := "Image"}}
-			{{if $animated}}{{$ext = ".gif"}}{{$typeExt = "Gif"}}{{end}}
-			{{- $fields = $fields.Append (sdict "name" (print "`" (index (split (index . 0) ":") 1) "`") "value" (print "[" $typeExt " Link](https://cdn.discordapp.com/emojis/" $id $ext ")") "inline" true) -}}
-		{{end}}
-		{{$embed.Set "title" "This message contains more than one emoji."}}
-		{{$embed.Set "fields" $fields}}
+		// {{range $emoji}}
+		// 	{{$animated := index . 1}}
+		// 	{{$id := index . 2}}
+		// 	{{$ext := ".png"}}{{$typeExt := "Image"}}
+		// 	{{if $animated}}{{$ext = ".gif"}}{{$typeExt = "Gif"}}{{end}}
+		// 	{{- $fields = $fields.Append (sdict "name" (print "`" (index (split (index . 0) ":") 1) "`") "value" (print "[" $typeExt " Link](https://cdn.discordapp.com/emojis/" $id $ext ")") "inline" true) -}}
+		// {{end}}
+		// {{$embed.Set "title" "This message contains more than one emoji."}}
+		// {{$embed.Set "fields" $fields}}
 	{{end}}
 	{{end}}
 	
@@ -131,7 +131,7 @@
 		{{deleteMessage nil $waitMsg 10}}
 	{{else if $embed}}
 		{{$embed.Set "color" 0x39ff14}}
-		{{$embed.Set "title" (joinStr "" "Big Emoji")}}
+		// {{$embed.Set "title" (joinStr "" "Big Emoji")}}
 		{{if $defEmoji}}
 			{{$embed.Set "footer" (sdict "text" (print "Default emoji not correct? Check help.\n" .Message.Author.String "  |  -bigemoji help") "icon_url" (.User.AvatarURL "256"))}}
 		{{else}}
