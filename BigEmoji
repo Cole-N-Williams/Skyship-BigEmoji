@@ -108,22 +108,9 @@
 		{{$emoji_U := ""}}{{$url := "https://twemoji.maxcdn.com/v/latest/72x72/"}}
 
 		{{if eq (add (len $emoji) (len $defEmoji)) 1}}
-			{{- range toRune (index $defEmoji 0 0)}}
-				{{- $emoji_U = joinStr "-" $emoji_U (printf "%04x" .)}}
-			{{- end -}}
-			{{$url = joinStr "" $url $emoji_U ".png"}}
-			{{$embed.Set "image"  (sdict "url" $url)}}
-			{{- $embed.Set "description" (print "`" (index $defEmoji 0 0) "`\n[Image Link](" $url ")") -}}
+
 		{{else}}
-			{{range $defEmoji}}
-				{{- range toRune (index . 0)}}
-					{{- $emoji_U = joinStr "-" $emoji_U (printf "%04x" . )}}
-				{{end}}
-				{{- $fields = $fields.Append (sdict "name" (print "`" (index . 0) "`") "value" (print "[Image Link](" (joinStr "" $url $emoji_U ".png") ")") "inline" true) -}}
-				{{$emoji_U = ""}}
-			{{end}}
-			{{$embed.Set "title" "This message contains more than one emoji."}}
-			{{$embed.Set "fields" $fields}}
+		
 		{{end}}
 	{{end}}
 		
@@ -135,9 +122,7 @@
 		{{deleteMessage nil $waitMsg 10}}
 	{{else if $embed}}
 		{{$embed.Set "color" 0x39ff14}}
-		{/*
-		{{$embed.Set "title" (joinStr "" "Big Emoji")}}
-		*/}
+
 		{{if $defEmoji}}
 			{{$embed.Set "footer" (sdict "text" (print "Default emoji not correct? Check help.\n" .Message.Author.String "  |  -bigemoji help") "icon_url" (.User.AvatarURL "256"))}}
 		{{else}}
